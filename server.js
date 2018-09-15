@@ -12,15 +12,15 @@ if (process.env.PRODUCTION) {
 app.use(bodyParser.json());
 
 app.post('/api/account_service/account', (req, res) => {
-  // do things
-  console.log('req in post request', req.body);
   db.save(req.body);
   res.send('You saved a trip')
+});
 
-})
-
-app.get('/api/account_service/account', (req, res) => {
-  // do things
+app.get('/api/account_service/account/:email', (req, res) => {
+  db.trip.find({ email: req.params.email })
+  .then(trips => {
+    res.end(JSON.stringify(trips));
+  })
 });
 
 
