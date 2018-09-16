@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./database/index.js');
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.post('/api/account_service/account', (req, res) => {
 app.get('/api/account_service/account/:email', (req, res) => {
   db.trip.find({ email: req.params.email })
   .then(trips => {
-    res.end(JSON.stringify(trips));
+    res.send(trips);
   })
 });
 
